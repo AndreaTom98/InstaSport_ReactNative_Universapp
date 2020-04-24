@@ -13,8 +13,8 @@ const Post = props => {
             </View>
             <Image source={{uri: props.image}} style={styles.postImage} />
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-                <Ionicons style={{marginLeft: 10, marginTop: 10}} name="md-heart-empty" size={32} color="black" />
-                <Ionicons style={{marginRight: 10, marginTop: 10}} name="ios-save" size={32} color="black" />
+                <Ionicons style={{marginLeft: 10, marginTop: 10}} name="md-heart-empty" size={28} color="black" />
+                <Ionicons style={{marginRight: 10, marginTop: 10}} name="md-bookmark" size={28} color="black" />
             </View>
         </View>
     )
@@ -24,12 +24,17 @@ const styles = StyleSheet.create({
     container: {
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT / 3,
-        borderTopWidth: 1,
-        borderBottomWidth: 1,
+        marginVertical: 10,
+        elevation: 2,
+        shadowColor: 'black',
+        shadowOffset: {width: 0, height: 2},
+        shadowOpacity: 0.2,
+        shadowRadius: 5,
+        backgroundColor: 'white'
     },
     userImage: {
-        width: 60,
-        height: 60,
+        width: SCREEN_HEIGHT / 15,
+        height: SCREEN_HEIGHT / 15,
         borderRadius: 30,
     },
     postImage: {

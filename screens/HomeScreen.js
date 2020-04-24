@@ -6,6 +6,7 @@ import Data from "../data/fake-data";
 export default function Home(props) {
   const Posts = Data.map(data => (
     <Post
+      key={data.id}
       imageUri={data.userImage}
       userName={data.userName}
       image={data.image}
@@ -21,7 +22,7 @@ export default function Home(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#eae8e8",
     alignItems: "center"
   }
 });
