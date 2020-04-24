@@ -1,15 +1,19 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import Post from '../components/Post';
-import Data from '../data/fake-data';
+import React from "react";
+import { StyleSheet, View, ScrollView } from "react-native";
+import Post from "../components/Post";
+import Data from "../data/fake-data";
 
 export default function Home(props) {
   const Posts = Data.map(data => (
-    <Post imageUri={data.image} userName={data.userName} image={data.image} />
-  ))
+    <Post
+      imageUri={data.userImage}
+      userName={data.userName}
+      image={data.image}
+    />
+  ));
   return (
     <View style={styles.container}>
-      {Posts}
+      <ScrollView>{Posts}</ScrollView>
     </View>
   );
 }
@@ -17,7 +21,7 @@ export default function Home(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-  },
+    backgroundColor: "#fff",
+    alignItems: "center"
+  }
 });
