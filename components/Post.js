@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image,StyleSheet} from 'react-native';
+import {View, Text, Image,StyleSheet, TouchableOpacity} from 'react-native';
 import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../utils/helper';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -11,7 +11,9 @@ const Post = props => {
                 <Image source={{uri: props.imageUri}} style={styles.userImage} />
                 <Text style={styles.userName}>{props.userName}</Text>
             </View>
-            <Image source={{uri: props.image}} style={styles.postImage} />
+            <TouchableOpacity onPress={props.onPressImage}>
+                <Image source={{uri: props.image}} style={styles.postImage} />
+            </TouchableOpacity>
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                 <Ionicons style={{marginLeft: 10, marginTop: 10}} name="md-heart-empty" size={28} color="black" />
                 <Ionicons style={{marginRight: 10, marginTop: 10}} name="md-bookmark" size={28} color="black" />
