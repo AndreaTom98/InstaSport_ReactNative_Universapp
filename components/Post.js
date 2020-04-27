@@ -7,8 +7,16 @@ import { Ionicons } from '@expo/vector-icons';
 const Post = props => {
     const [like, setLike] = useState(false);
 
+    let lastTap = null;
     const onPressLike = () => {
-        setLike(!like)
+        const now = Date.now();
+        const time_delay = 400
+        if(lastTap && (now - lastTap) < time_delay) {
+            setLike(!like)
+        } else {
+            lastTap = now
+        }
+        
     }
     const heartColor = like ? 'red' : 'black';
     const imageSource = like ? require(`../assets/images/full-heart.png`) : require(`../assets/images/heart.png`)
