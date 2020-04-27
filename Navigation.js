@@ -14,7 +14,7 @@ function StackNavigation() {
   return (
       <Stack.Navigator>
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="PostDetail" component={PostDetail} />
+        <Stack.Screen options={({route}) => ({title: route.params.title})} name="PostDetail" component={PostDetail} />
         <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>
   );
