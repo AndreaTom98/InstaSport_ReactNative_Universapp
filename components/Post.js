@@ -1,10 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, Image,StyleSheet, TouchableOpacity} from 'react-native';
 import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../utils/helper';
 import { Ionicons } from '@expo/vector-icons';
 
 
 const Post = props => {
+    const [like, setLike] = useState(false);
+
+    const onPressLike = () => {
+        setLike(!like)
+    }
+    const heartColor = like ? 'red' : 'black';
+    const imageSource = like ? require(`../assets/images/full-heart.png`) : require(`../assets/images/heart.png`)
     return (
         <View style={styles.container}>
             <View style={{flexDirection: 'row', padding: 10, alignItems: 'center'}}>
@@ -15,7 +22,9 @@ const Post = props => {
                 <Image source={{uri: props.image}} style={styles.postImage} />
             </TouchableOpacity>
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-                <Ionicons style={{marginLeft: 10, marginTop: 10}} name="md-heart-empty" size={28} color="black" />
+                <TouchableOpacity onPress={onPressLike}>
+                    <Image source={imageSource} style={{width: 25, height: 25, marginLeft: 25, marginTop: 10, tintColor: heartColor}} />
+                </TouchableOpacity>
                 <Ionicons style={{marginRight: 10, marginTop: 10}} name="md-bookmark" size={28} color="black" />
             </View>
         </View>
