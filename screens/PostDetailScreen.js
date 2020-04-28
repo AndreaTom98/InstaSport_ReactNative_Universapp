@@ -9,7 +9,7 @@ export default function PostDetail(props) {
   return (
     <View style={styles.container}>
     <TouchableOpacity style={styles.userNameContainer} onPress={() => props.navigation.navigate('Profile', {
-      postData
+      userId: postData.userId,
     })}>
       <Text style={styles.userName}>By {postData.userName}</Text>
     </TouchableOpacity>
