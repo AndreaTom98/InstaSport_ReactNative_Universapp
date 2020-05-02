@@ -1,10 +1,12 @@
 import React from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 import Post from "../components/Post";
-import Data from "../data/fake-data";
+import {useSelector} from 'react-redux';
 
 export default function Home(props) {
-  const Posts = Data.map(data => (
+  const AllPosts = useSelector(state => state.posts.posts)
+  console.warn(AllPosts)
+  const Posts = AllPosts.map(data => (
     <Post
       key={data.id}
       imageUri={data.userImage}
