@@ -4,11 +4,10 @@ import {SCREEN_WIDTH} from '../utils/helper';
 
 export default function SavedPost(props) {
   const saveSource = true ? require(`../assets/images/full-bookmark.png`) : require(`../assets/images/bookmark.png`)
-  const imageURI = 'https://images.unsplash.com/photo-1552072805-2a9039d00e57?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80'
   return (
     <View style={styles.container}>
-      <Image source={{uri: imageURI}} style={styles.postImage} />
-      <Text style={styles.userName}>Billy</Text>
+      <Image source={{uri: props.image}} style={styles.postImage} />
+      <Text style={styles.userName}>{props.userName}</Text>
       <Image source={saveSource} style={styles.saveImage}  />
     </View>
   );
@@ -22,7 +21,8 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems:'center'
+    alignItems:'center',
+    marginTop: 20
   },
   postImage: {
       height: 80,

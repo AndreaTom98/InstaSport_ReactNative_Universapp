@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
 import {View, Text, Image,StyleSheet, TouchableOpacity} from 'react-native';
 import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../utils/helper';
-import { Ionicons } from '@expo/vector-icons';
+import {useDispatch} from 'react-redux';
+import {savePost} from '../store/actions/savePost'
 
 
 const Post = props => {
     const [like, setLike] = useState(false);
     const [save, setSave] = useState(false);
+    const dispatch = useDispatch();
 
     let lastTap = null;
     const onPressLike = () => {
@@ -21,6 +23,11 @@ const Post = props => {
 
     const onPressSave = () => {
         setSave(!save)
+        const postToSave = {
+            userName: props.userName,
+            postImage: props.image,
+        }
+        dispatch(savePost(postToSave))
     }
     const heartColor = like ? 'red' : 'black';
     const saveColor = save ? 'green' : 'black';
