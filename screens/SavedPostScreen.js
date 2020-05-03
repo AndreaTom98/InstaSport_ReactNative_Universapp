@@ -1,9 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import SavedPost from '../components/SavedPost';
-import {useSelector} from 'react-redux'
+import {removePost} from '../store/actions/removePost';
+import {useSelector, useDispatch} from 'react-redux'
 
 export default function SavedPostScreen() {
+  const dispatch = useDispatch();
+
   const savedPostList = useSelector(state => {
     const postArray = [];
     for (id in state.savedPost.savedItems) {
@@ -15,7 +18,7 @@ export default function SavedPostScreen() {
   console.log(savedPostList)
 
   const myPosts = savedPostList.map(post => (
-    <SavedPost key={post.id} userName={post.userName} image={post.postImage} />
+    <SavedPost onRemovePost={() => dispatch(removePost(post.id))} key={post.id} userName={post.userName} image={post.postImage} />
   ))
   return (
     <View style={styles.container}>
