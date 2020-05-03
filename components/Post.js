@@ -3,6 +3,7 @@ import {View, Text, Image,StyleSheet, TouchableOpacity} from 'react-native';
 import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../utils/helper';
 import {useDispatch} from 'react-redux';
 import {savePost} from '../store/actions/savePost'
+import {removePost} from '../store/actions/removePost';
 
 
 const Post = props => {
@@ -22,13 +23,13 @@ const Post = props => {
     }
 
     const onPressSave = () => {
-        setSave(!save)
         const postToSave = {
             userName: props.userName,
             postImage: props.image,
             id: props.id,
         }
-        dispatch(savePost(postToSave))
+        save ? dispatch(removePost(props.id)) : dispatch(savePost(postToSave))
+        setSave(!save)
     }
     const heartColor = like ? 'red' : 'black';
     const saveColor = save ? 'green' : 'black';
