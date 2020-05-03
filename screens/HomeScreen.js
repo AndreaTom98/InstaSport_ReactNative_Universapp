@@ -12,6 +12,7 @@ export default function Home(props) {
       imageUri={data.userImage}
       userName={data.userName}
       image={data.image}
+      id={data.id}
       onPressImage={() => props.navigation.navigate('PostDetail', {
         postId: data.id,
         title: data.title,

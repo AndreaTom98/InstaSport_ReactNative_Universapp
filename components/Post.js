@@ -26,6 +26,7 @@ const Post = props => {
         const postToSave = {
             userName: props.userName,
             postImage: props.image,
+            id: props.id,
         }
         dispatch(savePost(postToSave))
     }
