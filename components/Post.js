@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, Image,StyleSheet, TouchableOpacity} from 'react-native';
 import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../utils/helper';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {savePost} from '../store/actions/savePost'
 import {removePost} from '../store/actions/removePost';
 
@@ -10,6 +10,13 @@ const Post = props => {
     const [like, setLike] = useState(false);
     const [save, setSave] = useState(false);
     const dispatch = useDispatch();
+    const savedPost = useSelector(state => state.savedPost.savedItems);
+    let isSaved = null;
+    if (savedPost[props.id]) {
+        isSaved = savedPost[props.id].saved
+    }
+
+    console.warn(isSaved)
 
     let lastTap = null;
     const onPressLike = () => {
@@ -27,14 +34,15 @@ const Post = props => {
             userName: props.userName,
             postImage: props.image,
             id: props.id,
+            saved: true,
         }
         save ? dispatch(removePost(props.id)) : dispatch(savePost(postToSave))
         setSave(!save)
     }
     const heartColor = like ? 'red' : 'black';
-    const saveColor = save ? 'green' : 'black';
+    const saveColor = isSaved ? 'green' : 'black';
     const imageSource = like ? require(`../assets/images/full-heart.png`) : require(`../assets/images/heart.png`)
-    const saveSource = save ? require(`../assets/images/full-bookmark.png`) : require(`../assets/images/bookmark.png`)
+    const saveSource = isSaved ? require(`../assets/images/full-bookmark.png`) : require(`../assets/images/bookmark.png`)
     return (
         <View style={styles.container}>
             <View style={{flexDirection: 'row', padding: 10, alignItems: 'center'}}>
