@@ -1,11 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../utils/helper';
+import {SCREEN_WIDTH} from '../utils/helper';
 import Data from '../data/fake-data';
+import {useSelector} from 'react-redux'
 
 export default function PostDetail(props) {
   const {postId} = props.route.params;
-  const postData = Data.find(post => post.id === postId)
+  // const postData = Data.find(post => post.id === postId)
+  const postData = useSelector(state => state.posts.posts.find(post => post.id === postId))
   return (
     <View style={styles.container}>
     <TouchableOpacity style={styles.userNameContainer} onPress={() => props.navigation.navigate('Profile', {

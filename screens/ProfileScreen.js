@@ -9,7 +9,7 @@ export default function Profile(props) {
   const userImage = userPosts[0].userImage;
   const userName = userPosts[0].userName
   const postsImages = userPosts.map(post => (
-    <Image source={{uri: post.image}} style={styles.image} />
+    <Image key={post.id} source={{uri: post.image}} style={styles.image} />
   ))
   return (
     <View style={styles.container}>
