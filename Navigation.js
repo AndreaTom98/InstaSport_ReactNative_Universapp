@@ -6,6 +6,7 @@ import Home from "./screens/HomeScreen";
 import PostDetail from "./screens/PostDetailScreen";
 import Profile from "./screens/ProfileScreen";
 import SavedPost from "./screens/SavedPostScreen";
+import CreatePost from './screens/CreatePostScreen';
 import HeaderButton from "./components/HeaderButton";
 
 const Stack = createStackNavigator();
@@ -17,8 +18,11 @@ function StackNavigation() {
       <Stack.Screen
         options={({ navigation }) => ({
           headerLeft: () => (
-            <HeaderButton onPressLeft={() => navigation.toggleDrawer()} />
-          )
+            <HeaderButton left={true} onPressLeft={() => navigation.toggleDrawer()} />
+          ),
+          headerRight: () => (
+            <HeaderButton onPressRight={() => navigation.navigate('CreatePost')} />
+          ),
         })}
         name="Home"
         component={Home}
@@ -29,6 +33,7 @@ function StackNavigation() {
         component={PostDetail}
       />
       <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="CreatePost" component={CreatePost} />
     </Stack.Navigator>
   );
 }
