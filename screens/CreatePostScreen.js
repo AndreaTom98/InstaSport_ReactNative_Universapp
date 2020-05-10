@@ -21,8 +21,14 @@ export default function Profile(props) {
     const data = await axios.post(url, {
       title,
       image,
-      description
+      description,
+      id: 10,
+      userId: 'u1',
+      userName: 'Billy'
     });
+    setTitle("");
+    setImage("");
+    setDescription("");
 
     console.log(data);
   };
@@ -47,8 +53,8 @@ export default function Profile(props) {
         <TextInput
           style={styles.input}
           placeholder="Scrivi l'URL "
-          value={image}
-          onChangeText={value => setImage(value)}
+          value={description}
+          onChangeText={value => setDescription(value)}
         />
         <Button
           title="Invia"
