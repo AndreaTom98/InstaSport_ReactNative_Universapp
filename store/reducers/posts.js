@@ -6,15 +6,14 @@ initialState = {
 }
 
 const Posts = (state = initialState, action) => {
-    // switch(action.type) {
-    //     case FETCH_POST:
-    //         return {
-    //             posts: action.posts
-    //         }
-    //     default:
-    //         return state;
-    // }
-        return state
+    switch(action.type) {
+        case FETCH_POST:
+            return {
+                posts: action.posts
+            }
+        default:
+            return state;
+    }
 }
 
 export default Posts;

@@ -9,6 +9,21 @@ export const fetchPost = () => {
         const url = "https://instasport-66594.firebaseio.com/posts.json";
         const data = await axios.get(url)
         console.log('data from firebase:', data)
-        dispatch({type: FETCH_POST})
+        const myPosts = data.data;
+        const loadedPosts = [];
+        for (key in myPosts) {
+            loadedPosts.push(
+                new Post(
+                    key,
+                    myPosts[key].image,
+                    myPosts[key].title,
+                    myPosts[key].description,
+                    myPosts[key].userId,
+                    myPosts[key].userName,
+                    myPosts[key].userImage,
+                )
+            )
+        }
+        dispatch({type: FETCH_POST, posts: loadedPosts})
     }
 }

@@ -23,7 +23,8 @@ export default function CreatePost() {
       description,
       id: 10,
       userId: 'u1',
-      userName: 'Billy'
+      userName: 'Billy',
+      userImage: 'https://images.unsplash.com/photo-1552072805-2a9039d00e57?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80'
     });
     setTitle("");
     setImage("");

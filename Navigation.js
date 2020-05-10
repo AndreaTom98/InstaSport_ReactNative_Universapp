@@ -44,7 +44,7 @@ function SavedStackNavigation() {
       <Stack.Screen
         options={({ navigation }) => ({
           headerLeft: () => (
-            <HeaderButton onPressLeft={() => navigation.toggleDrawer()} />
+            <HeaderButton left onPressLeft={() => navigation.toggleDrawer()} />
           )
         })}
         name="SavedPost"
