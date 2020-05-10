@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
-  View,
   TextInput,
   Button,
   KeyboardAvoidingView,
@@ -11,7 +10,7 @@ import {
 import {isIos} from '../utils/helper'
 import axios from "axios";
 
-export default function Profile(props) {
+export default function CreatePost() {
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
@@ -33,7 +32,7 @@ export default function Profile(props) {
     console.log(data);
   };
   return (
-    <KeyboardAvoidingView keyboardVerticalOffset={100} style={{flex:1}}>
+    <KeyboardAvoidingView behavior={isIos ? "padding" : null} keyboardVerticalOffset={100} style={{flex:1}}>
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.title}>Titolo del post</Text>
         <TextInput
@@ -52,7 +51,7 @@ export default function Profile(props) {
         <Text style={styles.title}>Descrizione del post</Text>
         <TextInput
           style={styles.input}
-          placeholder="Scrivi l'URL "
+          placeholder="Scrivi l'URL"
           value={description}
           onChangeText={value => setDescription(value)}
         />
