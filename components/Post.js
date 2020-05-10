@@ -16,8 +16,6 @@ const Post = props => {
         isSaved = savedPost[props.id].saved
     }
 
-    console.warn(isSaved)
-
     let lastTap = null;
     const onPressLike = () => {
         const now = Date.now();

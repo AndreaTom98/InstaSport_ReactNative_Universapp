@@ -1,11 +1,15 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 import Post from "../components/Post";
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {fetchPost} from '../store/actions/fetchPost'
 
 export default function Home(props) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchPost());
+  })
   const AllPosts = useSelector(state => state.posts.posts)
-  console.warn(AllPosts)
   const Posts = AllPosts.map(data => (
     <Post
       key={data.id}

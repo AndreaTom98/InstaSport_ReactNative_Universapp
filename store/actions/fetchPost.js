@@ -1,5 +1,6 @@
 import axios from 'axios';
 export const FETCH_POST = 'FETCH_POST';
+import Post from '../../models/Post';
 
 
 export const fetchPost = () => {

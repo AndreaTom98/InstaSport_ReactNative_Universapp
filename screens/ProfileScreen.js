@@ -8,7 +8,6 @@ export default function Profile(props) {
   const userPosts = Data.filter(post => post.userId === userId);
   const userImage = userPosts[0].userImage;
   const userName = userPosts[0].userName
-  console.warn(userPosts);
   const postsImages = userPosts.map(post => (
     <Image source={{uri: post.image}} style={styles.image} />
   ))
