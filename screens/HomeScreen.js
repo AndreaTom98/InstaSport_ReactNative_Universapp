@@ -1,14 +1,18 @@
-import React, {useEffect} from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
+import React, {useEffect, useState} from "react";
+import { StyleSheet, View, ScrollView, ActivityIndicator } from "react-native";
 import Post from "../components/Post";
 import {useSelector, useDispatch} from 'react-redux';
 import {fetchPost} from '../store/actions/fetchPost'
 
 export default function Home(props) {
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchPost());
-  })
+    setIsLoading(true)
+    dispatch(fetchPost()).then(() => {
+      setIsLoading(false)
+    });
+  }, [dispatch])
   const AllPosts = useSelector(state => state.posts.posts)
   const Posts = AllPosts.map(data => (
     <Post
@@ -23,9 +27,16 @@ export default function Home(props) {
       })}
     />
   ));
+  const loading = () => {
+    return (
+      <View>
+        <ActivityIndicator size={'large'} />
+      </View>
+    )
+  }
   return (
     <View style={styles.container}>
-      <ScrollView>{Posts}</ScrollView>
+      <ScrollView>{isLoading ? loading() : Posts}</ScrollView>
     </View>
   );
 }
