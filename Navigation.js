@@ -7,6 +7,8 @@ import PostDetail from "./screens/PostDetailScreen";
 import Profile from "./screens/ProfileScreen";
 import SavedPost from "./screens/SavedPostScreen";
 import CreatePost from './screens/CreatePostScreen';
+import Signin from './screens/SignInScreen';
+import Signup from './screens/SignUpScreen';
 import HeaderButton from "./components/HeaderButton";
 
 const Stack = createStackNavigator();
@@ -56,13 +58,40 @@ function SavedStackNavigation() {
 
 function DrawerNavigation() {
   return (
-    <NavigationContainer>
       <Drawer.Navigator>
         <Drawer.Screen name="Home" component={StackNavigation} />
         <Drawer.Screen name="SavedPost" component={SavedStackNavigation} />
       </Drawer.Navigator>
-    </NavigationContainer>
   );
 }
 
-export default DrawerNavigation;
+function AuthNavigation() {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="Signin" component={Signin} />
+      <Drawer.Screen name="Signup" component={Signup} />
+    </Drawer.Navigator>
+);
+}
+
+
+function MainNavigation() {
+  const userToken = null;
+  return (
+    <NavigationContainer>
+      {userToken ? (
+        <DrawerNavigation />
+      ) : (
+        <AuthNavigation />
+      )}
+    </NavigationContainer>
+  )
+}
+
+
+// App principale
+  // funzionalita
+// Autenticazione
+  // sigin
+  // signup
+export default MainNavigation;
