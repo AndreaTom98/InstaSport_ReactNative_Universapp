@@ -10,6 +10,7 @@ import CreatePost from './screens/CreatePostScreen';
 import Signin from './screens/SignInScreen';
 import Signup from './screens/SignUpScreen';
 import HeaderButton from "./components/HeaderButton";
+import {useSelector} from 'react-redux'
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -76,7 +77,7 @@ function AuthNavigation() {
 
 
 function MainNavigation() {
-  const userToken = null;
+  const userToken = useSelector(state => state.authUser.token);
   return (
     <NavigationContainer>
       {userToken ? (
@@ -88,10 +89,4 @@ function MainNavigation() {
   )
 }
 
-
-// App principale
-  // funzionalita
-// Autenticazione
-  // sigin
-  // signup
 export default MainNavigation;

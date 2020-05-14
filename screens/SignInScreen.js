@@ -1,13 +1,16 @@
 import React, {useState} from 'react';
 import {View, Text, TextInput, StyleSheet, Button} from 'react-native';
+import {signin} from '../store/actions/authUser';
+import {useDispatch} from 'react-redux'
 
 
 const Signin  = ({navigation}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const dispatch = useDispatch();
 
     const onPressSignin = () => {
-
+        dispatch(signin(email, password))
     }
     return (
         <View style={styles.container}>
