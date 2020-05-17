@@ -1,4 +1,4 @@
-import {SIGNIN, SIGNUP} from '../actions/authUser';
+import {SIGNIN, SIGNUP, RETRIEVE_DATA} from '../actions/authUser';
 
 const initialState = {
     token: null,
@@ -16,6 +16,11 @@ const authUser = (state = initialState, action) => {
             return {
                 token: action.token,
                 userId: action.userId
+            }
+        case RETRIEVE_DATA: 
+            return {
+                token: action.token,
+                userId: action.userId,
             }
         default: 
             return state;

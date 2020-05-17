@@ -1,6 +1,8 @@
 export const SIGNUP = 'SIGNUP';
 export const SIGNIN = 'SIGNIN';
+export const RETRIEVE_DATA = 'RETRIEVE_DATA';
 import axios from 'axios';
+import {AsyncStorage} from 'react-native'
 
 export const signup = (email, password) => {
     return async dispatch => {
@@ -10,8 +12,8 @@ export const signup = (email, password) => {
             returnSecureToken: true,
         });
         console.log(data);
-
         dispatch({type: SIGNUP, token: data.data.idToken, userId: data.data.localId})
+        saveData(data.data.idToken, data.data.localId)
     }
 }
 
@@ -23,7 +25,22 @@ export const signin = (email, password) => {
             returnSecureToken: true,
         });
         console.log('data from signin', data);
-
         dispatch({type: SIGNIN, token: data.data.idToken, userId: data.data.localId})
+        saveData(data.data.idToken, data.data.localId)
+    }
+}
+
+const saveData = (token, userId) => {
+    AsyncStorage.setItem('userData', JSON.stringify({
+        token: token,
+        userId: userId,
+    }))
+}
+
+export const retrieveData = () => {
+    return async dispatch => {
+        const data = await AsyncStorage.getItem('userData');
+        const myData = JSON.parse(data);
+        dispatch({type: RETRIEVE_DATA, token: myData.token, userId: myData.userId})
     }
 }

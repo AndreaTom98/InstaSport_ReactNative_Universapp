@@ -9,8 +9,10 @@ import SavedPost from "./screens/SavedPostScreen";
 import CreatePost from './screens/CreatePostScreen';
 import Signin from './screens/SignInScreen';
 import Signup from './screens/SignUpScreen';
+import AuthLoading from './screens/LoadingAuth'
 import HeaderButton from "./components/HeaderButton";
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
+import {retrieveData} from './store/actions/authUser'
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -77,10 +79,20 @@ function AuthNavigation() {
 
 
 function MainNavigation() {
-  const userToken = useSelector(state => state.authUser.token);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    setIsLoading(true);
+    dispatch(retrieveData()).then(() => {
+      setIsLoading(false)
+    })
+  }, [dispatch])
+  const userToken = useSelector(state => state.authUser.token)
   return (
     <NavigationContainer>
-      {userToken ? (
+      {isLoading ?
+        <AuthLoading />
+        : userToken ? (
         <DrawerNavigation />
       ) : (
         <AuthNavigation />
