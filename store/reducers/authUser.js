@@ -1,4 +1,4 @@
-import {SIGNIN, SIGNUP, RETRIEVE_DATA} from '../actions/authUser';
+import {SIGNIN, SIGNUP, RETRIEVE_DATA, LOGOUT} from '../actions/authUser';
 
 const initialState = {
     token: null,
@@ -22,6 +22,8 @@ const authUser = (state = initialState, action) => {
                 token: action.token,
                 userId: action.userId,
             }
+        case LOGOUT:
+            return initialState
         default: 
             return state;
     }

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import Home from "./screens/HomeScreen";
 import PostDetail from "./screens/PostDetailScreen";
 import Profile from "./screens/ProfileScreen";
@@ -12,7 +12,7 @@ import Signup from './screens/SignUpScreen';
 import AuthLoading from './screens/LoadingAuth'
 import HeaderButton from "./components/HeaderButton";
 import {useSelector, useDispatch} from 'react-redux'
-import {retrieveData} from './store/actions/authUser'
+import {retrieveData, logout} from './store/actions/authUser'
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -59,9 +59,20 @@ function SavedStackNavigation() {
   );
 }
 
+function CustomDrawer(props) {
+  const dispatch = useDispatch()
+  return (
+    <DrawerContentScrollView>
+      <DrawerItem label="Home" onPress={() => props.navigation.navigate('Home')} />
+      <DrawerItem label="Saved Post" onPress={() => props.navigation.navigate('SavedPost')} />
+      <DrawerItem inactiveTintColor="red" label="Logout" onPress={() => dispatch(logout())} />
+    </DrawerContentScrollView>
+  )
+}
+
 function DrawerNavigation() {
   return (
-      <Drawer.Navigator>
+      <Drawer.Navigator drawerContent={props => <CustomDrawer navigation={props.navigation} />}>
         <Drawer.Screen name="Home" component={StackNavigation} />
         <Drawer.Screen name="SavedPost" component={SavedStackNavigation} />
       </Drawer.Navigator>

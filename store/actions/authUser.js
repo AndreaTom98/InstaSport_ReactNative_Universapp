@@ -1,6 +1,7 @@
 export const SIGNUP = 'SIGNUP';
 export const SIGNIN = 'SIGNIN';
 export const RETRIEVE_DATA = 'RETRIEVE_DATA';
+export const LOGOUT = 'LOGOUT';
 import axios from 'axios';
 import {AsyncStorage} from 'react-native'
 
@@ -28,6 +29,10 @@ export const signin = (email, password) => {
         dispatch({type: SIGNIN, token: data.data.idToken, userId: data.data.localId})
         saveData(data.data.idToken, data.data.localId)
     }
+}
+
+export const logout = () => {
+    return {type: LOGOUT}
 }
 
 const saveData = (token, userId) => {
