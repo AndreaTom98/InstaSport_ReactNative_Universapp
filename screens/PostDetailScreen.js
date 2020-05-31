@@ -13,7 +13,7 @@ export default function PostDetail(props) {
     <TouchableOpacity style={styles.userNameContainer} onPress={() => props.navigation.navigate('Profile', {
       userId: postData.userId,
     })}>
-      <Text style={styles.userName}>By {postData.userName}</Text>
+      <Text style={styles.userName}>Byyy {postData.userName}</Text>
     </TouchableOpacity>
       <Image source={{uri: postData.image}} style={styles.image} />
       <Text style={styles.description}>{postData.description}</Text>

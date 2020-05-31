@@ -101,9 +101,10 @@ function MainNavigation() {
   const userToken = useSelector(state => state.authUser.token)
   return (
     <NavigationContainer>
-      {isLoading ?
+      {/* {isLoading ?
         <AuthLoading />
-        : userToken ? (
+        :  */}
+      {userToken ? (
         <DrawerNavigation />
       ) : (
         <AuthNavigation />
