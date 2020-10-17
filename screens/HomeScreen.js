@@ -9,6 +9,7 @@ import {
 import Post from "../components/Post";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPost } from "../store/actions/fetchPost";
+import * as Notifications from 'expo-notifications';
 
 export default function Home(props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -35,6 +36,32 @@ export default function Home(props) {
       }
     />
   ));
+  // const triggerNotif = () => {
+  //   Notifications.scheduleNotificationAsync({
+  //     content: {
+  //       title: 'my first notification',
+  //       body: "my body notif"
+  //     },
+  //     trigger: {
+  //       seconds: 10,
+        
+  //     }
+  //   });
+  // }
+
+  const triggerNotification = () => {
+    Notifications.scheduleNotificationAsync({
+      content: {
+        title: "la mia notifica",
+        body: "il mio body",
+      },
+      trigger: {
+        seconds: 10,
+      }
+    })
+  }
+
+
   const loading = () => {
     return (
       <View>
@@ -44,6 +71,7 @@ export default function Home(props) {
   };
   return (
     <View style={styles.container}>
+      <Button title={'notificami'} onPress={triggerNotification} />
       <ScrollView>{isLoading ? loading() : Posts}</ScrollView>
     </View>
   );
