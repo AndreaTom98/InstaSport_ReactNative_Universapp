@@ -1,19 +1,25 @@
-import React, {useEffect, useState} from "react";
-import { StyleSheet, View, ScrollView, ActivityIndicator } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  ActivityIndicator,
+  Button
+} from "react-native";
 import Post from "../components/Post";
-import {useSelector, useDispatch} from 'react-redux';
-import {fetchPost} from '../store/actions/fetchPost'
+import { useSelector, useDispatch } from "react-redux";
+import { fetchPost } from "../store/actions/fetchPost";
 
 export default function Home(props) {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     dispatch(fetchPost()).then(() => {
-      setIsLoading(false)
+      setIsLoading(false);
     });
-  }, [dispatch])
-  const AllPosts = useSelector(state => state.posts.posts)
+  }, [dispatch]);
+  const AllPosts = useSelector(state => state.posts.posts);
   const Posts = AllPosts.map(data => (
     <Post
       key={data.id}
@@ -21,19 +27,21 @@ export default function Home(props) {
       userName={data.userName}
       image={data.image}
       id={data.id}
-      onPressImage={() => props.navigation.navigate('PostDetail', {
-        postId: data.id,
-        title: data.title,
-      })}
+      onPressImage={() =>
+        props.navigation.navigate("PostDetail", {
+          postId: data.id,
+          title: data.title
+        })
+      }
     />
   ));
   const loading = () => {
     return (
       <View>
-        <ActivityIndicator size={'large'} />
+        <ActivityIndicator size={"large"} />
       </View>
-    )
-  }
+    );
+  };
   return (
     <View style={styles.container}>
       <ScrollView>{isLoading ? loading() : Posts}</ScrollView>

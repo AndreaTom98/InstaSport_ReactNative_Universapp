@@ -5,7 +5,8 @@ import {
   TextInput,
   Button,
   KeyboardAvoidingView,
-  ScrollView
+  ScrollView,
+  FlatList
 } from "react-native";
 import {isIos} from '../utils/helper'
 import axios from "axios";
@@ -42,6 +43,7 @@ export default function CreatePost() {
           value={title}
           onChangeText={value => setTitle(value)}
         />
+        <FlatList refreshing />
         <Text style={styles.title}>Immagine del post</Text>
         <TextInput
           style={styles.input}
