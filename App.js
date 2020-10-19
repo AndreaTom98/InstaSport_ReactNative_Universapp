@@ -6,6 +6,7 @@ import rootReducer from './store/reducers/'
 import {composeWithDevTools} from 'redux-devtools-extension';
 import ReduxThunk from 'redux-thunk';
 import * as Permissions from 'expo-permissions';
+import * as Notifications from 'expo-notifications';
 
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
@@ -19,8 +20,14 @@ export default function App() {
       return status;
     }).then(status => {
       if(status.status !== 'granted') {
-        return;
+        throw new Error('no permissions')
       }
+    }).then(() => {
+      return Notifications.getExpoPushTokenAsync();
+    }).then(data => {
+      console.log(data)
+    }).catch(error => {
+      return null;
     })
   }, [])
   return (
