@@ -36,18 +36,6 @@ export default function Home(props) {
       }
     />
   ));
-  // const triggerNotif = () => {
-  //   Notifications.scheduleNotificationAsync({
-  //     content: {
-  //       title: 'my first notification',
-  //       body: "my body notif"
-  //     },
-  //     trigger: {
-  //       seconds: 10,
-        
-  //     }
-  //   });
-  // }
 
   const triggerNotification = () => {
     Notifications.scheduleNotificationAsync({

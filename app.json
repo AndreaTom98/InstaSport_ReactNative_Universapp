@@ -28,7 +28,7 @@
     "android": {
       "package": "com.universapp.instasport",
       "versionCode": 1,
-      "useNextNotificationsApi": "true"
+      "useNextNotificationsApi": true
     }
   }
 }
