@@ -12,6 +12,13 @@ import { fetchPost } from "../store/actions/fetchPost";
 import * as Notifications from 'expo-notifications';
 
 export default function Home(props) {
+
+  useEffect(() => {
+    Notifications.addNotificationResponseReceivedListener(response => {
+      alert('hai cliccato sulla notifica')
+    })
+  }, [])
+
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
