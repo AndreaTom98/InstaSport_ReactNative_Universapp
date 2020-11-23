@@ -17,7 +17,7 @@ export default function CreatePost() {
   const [description, setDescription] = useState("");
 
   const onSumbitData = async () => {
-    const url = "https://instasport-66594.firebaseio.com/posts.json";
+    const url = "[inserisci il tuo url di Firebase]";
     const data = await axios.post(url, {
       title,
       image,

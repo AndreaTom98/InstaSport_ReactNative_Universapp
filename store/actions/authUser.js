@@ -7,7 +7,7 @@ import {AsyncStorage} from 'react-native'
 
 export const signup = (email, password) => {
     return async dispatch => {
-        const data = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD1XcC-uvhK36KY5z8n-CE2RSamfYkGPPs', {
+        const data = await axios.post('[inserisci il tuo url]', {
             email: email,
             password: password,
             returnSecureToken: true,
@@ -20,7 +20,7 @@ export const signup = (email, password) => {
 
 export const signin = (email, password) => {
     return async dispatch => {
-        const data = await axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD1XcC-uvhK36KY5z8n-CE2RSamfYkGPPs', {
+        const data = await axios.post('[inserisci il tuo url]', {
             email: email,
             password: password,
             returnSecureToken: true,

@@ -10,16 +10,42 @@ import Post from "../components/Post";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPost } from "../store/actions/fetchPost";
 import * as Notifications from 'expo-notifications';
+import * as Permissions from 'expo-permissions';
+
 
 export default function Home(props) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [pushToken, setPushToken] = useState();
+
+  useEffect(() => {
+    Permissions.getAsync(Permissions.NOTIFICATIONS).then(status => {
+      if(status.status !== 'granted') {
+        return Permissions.askAsync(Permissions.NOTIFICATIONS)
+      }
+      return status;
+    }).then(status => {
+      if(status.status !== 'granted') {
+        throw new Error('no permissions')
+      }
+    }).then(() => {
+      return Notifications.getExpoPushTokenAsync();
+    }).then(data => {
+      console.log(data)
+      setPushToken(data.data);
+    }).catch(error => {
+      return null;
+    })
+  }, [])
 
   useEffect(() => {
     Notifications.addNotificationResponseReceivedListener(response => {
       alert('hai cliccato sulla notifica')
     })
+    Notifications.addNotificationReceivedListener(response => {
+      console.log('notifica dentro lapp')
+    })
   }, [])
 
-  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     setIsLoading(true);
@@ -45,16 +71,31 @@ export default function Home(props) {
   ));
 
   const triggerNotification = () => {
-    Notifications.scheduleNotificationAsync({
-      content: {
-        title: "la mia notifica",
-        body: "il mio body",
+    // Notifications.scheduleNotificationAsync({
+    //   content: {
+    //     title: "la mia notifica",
+    //     body: "il mio body",
+    //   },
+    //   trigger: {
+    //     seconds: 10,
+    //   }
+    // })
+    fetch('https://exp.host/--/api/v2/push/send', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Accept-encoding': 'gzip, deflate',
+        'Content-Type': 'application/json',
       },
-      trigger: {
-        seconds: 10,
-      }
-    })
-  }
+      body: JSON.stringify({
+        to: pushToken,
+        data: {data: 'data random'},
+        title: 'my title',
+        body: 'my body'
+      })
+  })
+}
+  
 
 
   const loading = () => {
